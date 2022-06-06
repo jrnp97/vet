@@ -8,19 +8,20 @@ Criar um programa para uma veterinaria, com os seguintes features:
         3.1 Animal, Data inicio, Data finalizaçao, Valor, Detalhes.
 
 """
+import os
+import sys
 from pprint import pprint
 
+# Register this full path inside the sys.path
+sys.path.insert(0, os.getcwd())
+
 import animals
-from animals import Cachorro, Macaco
+from animals import Cachorro, Macaco, STORAGE
 from services.clean import Limpieza
 from services.doctor import Medico
 from services.payment import Pago
+from utils import menu_displayer
 
-
-animales = {
-    Cachorro.__name__: [],
-    Macaco.__name__: [],
-}
 
 registro_servicios = {
     Medico.__name__: [],
@@ -89,7 +90,6 @@ def control_animal() -> None:
 
 def servicios_management() -> None:
     """ Funcion para controlar los servicios """
-    print("-"*10, "SERVICIOS", "-"*10)
     menu = {
         1: {
             "class": Medico,
@@ -104,12 +104,15 @@ def servicios_management() -> None:
             "option": "Pagamento Servicio",
         },
         4: {
-            "fnc": lambda: exit(),
             "option": "Salir",
         }
     }
-    _, option = menu_displayer(menu=menu)
-    option.run(animales=animales, registro=registro_servicios)
+    while True:
+        print("-" * 10, "SERVICIOS", "-" * 10)
+        opt, option = menu_displayer(menu=menu)
+        if opt == 4:
+            return
+        option["class"].run(animales=STORAGE, registro=registro_servicios)
 
 
 main_menu = {

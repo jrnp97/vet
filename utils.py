@@ -1,22 +1,23 @@
 """Module defining function utils of the program"""
 
 def select_instance(object_name: str, max_value: int) -> int:
-	""" Function to request a valid user data"""
-    while (result := -1) < 0 or (result := -1) >= max_value:
+    """ Function to request a valid user data"""
+    result = -1
+    while max_value < result < 0:
         result = int(input(f"Selecciona el {object_name} [0-{max_value-1}]: "))
     return result
 
 
-def solicitacao_dados(dados: dict) -> dict:
-	"""
-	Function to request user data
-	args:
-		datos: A dict with the below structure:
-		{
-			<dato-key>: <display-name>
-		}
-	"""
-	info = {}
+def solicitacao_dados(datos: dict) -> dict:
+    """
+    Function to request user data
+    args:
+    	datos: A dict with the below structure:
+    	{
+    		<dato-key>: <display-name>
+    	}
+    """
+    info = {}
     for key, value in datos.items():
         dado = input(f"Por favor diga o valor de {value}: ")
         info[key] = dado
@@ -37,6 +38,7 @@ def menu_displayer(menu: dict) -> tuple:
     """
     for key, value in menu.items():
         print(f"{key}. {value['option']}")
-    while (action := -1) not in menu.keys():
+    action  = -1
+    while action not in menu.keys():
         action = int(input("Seleccione la opcion a realizar: "))
     return action, menu[action]

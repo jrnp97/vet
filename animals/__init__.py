@@ -16,7 +16,7 @@ class AnimalControl:
 
     @classmethod
     def exists_animais(cls):
-        return bool(animales[cls.__name__])
+        return bool(STORAGE[cls.__name__])
 
     @classmethod
     def cadastrar(cls):
@@ -24,7 +24,7 @@ class AnimalControl:
         dados = solicitacao_dados(datos=DATA)
         animal = cls(**dados)
         print(f"{cls.__name__.capitalize()} CRIADO: {animal}")
-        animales[cls.__name__].append(animal)
+        STORAGE[cls.__name__].append(animal)
         return animal
 
     @classmethod
@@ -35,12 +35,12 @@ class AnimalControl:
             return
         animal_index = select_instance(
             object_name=cls.__name__, 
-            max_value=len(animales[cls.__name__])
+            max_value=len(STORAGE[cls.__name__])
         )
-        animal = animales[cls.__name__][animal_index]
+        animal = STORAGE[cls.__name__][animal_index]
         print(animal, "&"*5)
         dados = solicitacao_dados(datos=DATA)
-        for key, value in datos.items():
+        for key, value in dados.items():
             setattr(animal, key, value)
         return animal
 
@@ -52,9 +52,9 @@ class AnimalControl:
             return
         animal_index = select_instance(
             object_name=cls.__name__, 
-            max_value=len(animales[cls.__name__])
+            max_value=len(STORAGE[cls.__name__])
         )
-        animal = animales[cls.__name__][animal_index]
+        animal = STORAGE[cls.__name__][animal_index]
         print(animal)
         return 
 
@@ -66,11 +66,11 @@ class AnimalControl:
             return
         animal_index = select_instance(
             object_name=cls.__name__, 
-            max_value=len(animales[cls.__name__])
+            max_value=len(STORAGE[cls.__name__])
         )
         confirmation = input("Estas seguro que deseas eliminarlo? [y/n]: ")
         if confirmation == "y":
-            animales[cls.__name__].pop(animal_index)
+            STORAGE[cls.__name__].pop(animal_index)
         else:
             print("Eliminacion abortada :)")
         return 
@@ -78,7 +78,7 @@ class AnimalControl:
     @classmethod
     def display_all(cls):
         print("ANIMALES")
-        pprint(animales[cls.__name__])
+        pprint(STORAGE[cls.__name__])
 
 
 # Representaçoes da Vida real
@@ -103,3 +103,8 @@ TYPES = (
     Cachorro,
     Macaco
 )
+
+STORAGE = {
+    Cachorro.__name__: [],
+    Macaco.__name__: [],
+}
