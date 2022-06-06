@@ -13,7 +13,10 @@ import sys
 from pprint import pprint
 
 # Register this full path inside the sys.path
-sys.path.insert(0, os.getcwd())
+PATH = os.getcwd()
+if 'veterinaria' in PATH:
+    PATH = os.path.join(PATH, '..')
+sys.path.insert(0, PATH)
 
 import animals
 from animals import Cachorro, Macaco, STORAGE

@@ -24,6 +24,7 @@ class Medico(ServiceInterface):
             for msg in process:
                 time.sleep(5)
                 sp.write(msg)
+            sp.text = "Executed successfully"
             sp.ok("✔")
 
 
