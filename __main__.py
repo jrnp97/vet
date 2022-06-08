@@ -12,20 +12,58 @@ import os
 import sys
 from pprint import pprint
 
+"""
+Services is a package
+- Sevastian Macias
+- Maria Helena
+- Juan Villalba
+- William Poveda - NO
+- Reyder Assis Ferreira
+- Jose Davi
+- Rubens 
+- Yury
+
+<no diff>
+- Sebastiao Marcus
+
+Services is a namespace
+- Carlos
+- William Poveda
+
+Animals is a project
+- Leidy
+
+Animals is a package
+- Renata
+- Diana
+- Diego
+- Reyder
+
+Animals is a namespace
+- Yury
+- Carlos
+- Joao Santos
+
+"""
 # Register this full path inside the sys.path
+
 PATH = os.getcwd()
+print("PATH", PATH)
+print("SYS.PATH", sys.path)
 if 'veterinaria' in PATH:
     PATH = os.path.join(PATH, '..')
 sys.path.insert(0, PATH)
+print("SYS.PATH 2", sys.path)
 
-import animals
+
+import animals # Importo o pacote o __init__.py
 from animals import Cachorro, Macaco, STORAGE
 from services.clean import Limpieza
 from services.doctor import Medico
 from services.payment import Pago
 from utils import menu_displayer
 
-
+# Declarando um dict
 registro_servicios = {
     Medico.__name__: [],
     Limpieza.__name__: [],
@@ -107,6 +145,10 @@ def servicios_management() -> None:
             "option": "Pagamento Servicio",
         },
         4: {
+            "action": lambda : pprint(registro_servicios),
+            "option": "Show Services",
+        },
+        5: {
             "option": "Salir",
         }
     }
@@ -114,6 +156,9 @@ def servicios_management() -> None:
         print("-" * 10, "SERVICIOS", "-" * 10)
         opt, option = menu_displayer(menu=menu)
         if opt == 4:
+            option["action"]()
+            continue
+        if opt == 5:
             return
         option["class"].run(animales=STORAGE, registro=registro_servicios)
 
@@ -123,9 +168,12 @@ main_menu = {
         2: {"option": "Servicios", "action": servicios_management},
         3: {"option": "Salir", "action": lambda : exit()}
 }
+
 while True:
-    print("*"*10, "VETERINARIA", "*"*10)
-    _, option = menu_displayer(menu=main_menu)
+    print("*"*10, "VETERINARIA", "*"*10) 
+    print("RES", result, type(result))
+    _, option = menu_displayer(menu=main_menu) # invocando/chamando - llamando
+    print("SELECTED OPT", _)
+    print("OPTION", option)
+    print("ACTION", option["action"])
     option["action"]()
-
-

@@ -11,9 +11,17 @@ class ServiceInterface:
         self.animal = animal
         self.data_de_inicio = data_de_inicio
         self.valor = valor
+        self._paid = 0.0
 
     def __str__(self):
         return f"[{self.__class__.__name__.upper()}] {self.identifier} {self.animal} {self.data_de_inicio}"
+
+    @property
+    def is_paid(self):
+        return self.valor == self._paid
+
+    def pay(self):
+        self._paid = self.valor
 
     @classmethod
     def get_price(cls) -> float:
