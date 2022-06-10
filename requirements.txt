@@ -1,0 +1,2 @@
+termcolor @ file:///home/p/.cache/pypoetry/artifacts/33/6b/61/45ca85fe93f3295319a6eb1d6a8d2d449b6fa6d17c2ed2ec1810196a4a/termcolor-1.1.0.tar.gz
+yaspin @ file:///home/p/.cache/pypoetry/artifacts/c9/f9/85/a7745419a7b786e5bd6b91a6b9bdae7a4612671ecd52c2cd2703ff061b/yaspin-2.1.0-py3-none-any.whl
