@@ -171,9 +171,5 @@ main_menu = {
 
 while True:
     print("*"*10, "VETERINARIA", "*"*10) 
-    print("RES", result, type(result))
     _, option = menu_displayer(menu=main_menu) # invocando/chamando - llamando
-    print("SELECTED OPT", _)
-    print("OPTION", option)
-    print("ACTION", option["action"])
     option["action"]()

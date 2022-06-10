@@ -1,5 +1,7 @@
 """ Package initializer """
 
+import json
+from pprint import pprint
 from veterinaria.utils import solicitacao_dados
 
 DATA = dict(
@@ -25,6 +27,15 @@ class AnimalControl:
         animal = cls(**dados)
         print(f"{cls.__name__.capitalize()} CRIADO: {animal}")
         STORAGE[cls.__name__].append(animal)
+        arquivo = open("animais_storage.json", "w")
+        print("STORAGE ORIGINAL", STORAGE)
+        storage_json = {
+            key: [_animal.__dict__() for _animal in value]
+            for key, value in STORAGE.items()
+        }
+        print("STORAGE EDITADO", storage_json)
+        arquivo.write(json.dumps(storage_json, indent=2))  # encoding
+        arquivo.close() # SEMPRE TENHO QUE FECHAR O ARQUIVO.
         return animal
 
     @classmethod
@@ -104,7 +115,23 @@ TYPES = (
     Macaco
 )
 
-STORAGE = {
-    Cachorro.__name__: [],
-    Macaco.__name__: [],
-}
+# CONTEXT MANAGER
+with open("animais_storage.json", "r") as _file:
+    # DISPONIBILIZAR O OBJETO AQUI!!
+    file_data = _file.read()
+
+    # FAZEM ALGO QUANDO O CODIGO FINALIZA!! => FECHANDO O ARQUIVO AUTOMATICAMENT
+
+# _file.read()
+if file_data:
+    STORAGE = {}
+    print("RAW DATA TYPE", type(file_data))
+    for typo_animal, animales in json.loads(file_data).items(): # decoding
+        type_class = locals()[typo_animal]
+        # import pdb;pdb.set_trace() # BREAKPOINT
+        STORAGE[typo_animal] = [type_class(**animal) for animal in animales]
+else:
+    STORAGE = {
+        Cachorro.__name__: [],
+        Macaco.__name__: [],
+    }

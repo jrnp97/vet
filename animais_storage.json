@@ -1,0 +1,21 @@
+{
+  "Cachorro": [
+    {
+      "nome": "af",
+      "sobrenome": "af",
+      "nome_do_dono": "af",
+      "idade": "af",
+      "raza": "af",
+      "tipo": "DOMESTICO"
+    },
+    {
+      "nome": "jasfja",
+      "sobrenome": "asfd",
+      "nome_do_dono": "asf",
+      "idade": "asf",
+      "raza": "af",
+      "tipo": "DOMESTICO"
+    }
+  ],
+  "Macaco": []
+}
